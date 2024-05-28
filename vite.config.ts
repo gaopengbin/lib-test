@@ -9,7 +9,7 @@ export default defineConfig({
     vue(),
     viteExternalsPlugin({
       cesium: 'Cesium', // 外部化 cesium 依赖，之后全局访问形式是 window['Cesium']
-      // '@cesium/widgets': 'Cesium',
+      '@cesium/widgets': 'Cesium',
     }),
   ],
   optimizeDeps:{
