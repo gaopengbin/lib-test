@@ -53,6 +53,7 @@ class Tree {
             this.options.props.extraBtns.reverse();
         }
         this.element = options.el;
+        this.element?.classList.add("rootUL");
     }
 
     initialize() {

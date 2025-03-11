@@ -8,11 +8,22 @@ export default defineConfig({
   plugins: [
     vue(),
     viteExternalsPlugin({
-      cesium: 'Cesium', // 外部化 cesium 依赖，之后全局访问形式是 window['Cesium']
+      'cesium': 'Cesium', // 外部化 cesium 依赖，之后全局访问形式是 window['Cesium']
       '@cesium/widgets': 'Cesium',
     }),
   ],
   optimizeDeps:{
-    exclude: ['cesium']
+    // exclude: ['cesium']
+  },
+  server: {
+    port: 8080,
+    open: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   }
 })

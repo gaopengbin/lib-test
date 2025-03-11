@@ -1,12 +1,11 @@
 <script setup lang="ts">
-// import { initScene } from "czm-sdk";
-import cc from "czm-sdk";
-console.log(cc);
+import { getViewer } from "ssczm";
 import { Tree } from "./tree/tree";
 import "./tree/tree-view.scss";
 import { nextTick } from "vue";
+import "./test/test";
 nextTick(() => {
-  console.log("nextTick");
+  console.log("nextTick", getViewer());
   let t = new Tree({
     el: document.getElementById("test"),
     treeData: [
@@ -48,22 +47,26 @@ nextTick(() => {
           },
         ],
       },
+      {
+        label: "点",
+      },
     ],
     style: {
       // parentIcon: "src/assets/images/文件夹@2x.png",
       parentIcon: "bi bi-folder",
-      childrenIcon: "bi bi-award",
+      childrenIcon: "bi bi-file-earmark-image",
     },
     defaultExpandAll: true,
     props: {
       label: "label",
       children: "children",
       labelRender: (data: any) => {
-        if (data.children) {
-          return `<font style="color:var(--bs-emphasis-color)">${data.label}</font>`;
-        } else {
-          return `<font color='red'>${data.label}</font>`;
-        }
+        return data.label;
+        // if (data.children) {
+        //   return `<font style="color:var(--bs-emphasis-color)">${data.label}</font>`;
+        // } else {
+        //   return `<font color='red'>${data.label}</font>`;
+        // }
       },
       handleNodeClick: (node: any, e: Event) => {
         console.log("handleNodeClick", node, e);
@@ -90,20 +93,19 @@ nextTick(() => {
   t.initialize();
 });
 
-// const div: HTMLDivElement = document.createElement("div");
-// div.id = "earth";
-// div.style.width = "80vw";
-// div.style.height = "80vh";
-// document.getElementById("app")?.appendChild(div);
-// let viewer = initScene(div);
-// console.log(viewer);
 </script>
 
 <template>
+  <base-earth configUrl="config/config.json"/>
+  <my-test />
+  <!-- <basic-test /> -->
   <n-button>naive-ui</n-button>
   <button type="button" class="btn btn-primary">Primary</button>
   <button type="button" class="btn btn-success">success</button>
-  <ul id="test"></ul>
+  <div class="treeview">
+    <ul id="test"></ul>
+  </div>
+
   <!-- <div id="earth"></div> -->
   <w-comp />
   <basic-test />
@@ -112,12 +114,22 @@ nextTick(() => {
 <style scoped>
 ul,
 #test {
-    list-style-type: none;
-    padding-left: 1rem;
+  list-style-type: none;
+  padding-left: 1rem;
 }
 
 #test {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+}
+.treeview {
+  width: 600px;
+  height: 300px;
+  overflow: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  text-align: left;
 }
 </style>

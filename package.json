@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "czm-sdk": "file:czm-sdk-0.0.0.tgz",
+    "axios": "^1.7.7",
+    "bootstrap-icons": "^1.11.3",
     "naive-ui": "^2.38.2",
+    "ssczm": "file:ssczm-0.0.0.tgz",
     "vue": "^3.4.21"
   },
   "devDependencies": {
